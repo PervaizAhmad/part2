@@ -31,45 +31,44 @@ nav ul {
   justify-content: center;
   flex-wrap: wrap;
   margin: auto;
-  /* text-align: center; */
   list-style-type: none;
 }
 
 nav ul li {
   margin-top: 1.4em;
   align-self: center;
-  width: 13em;
-  /* float: left; */
-  /* margin-left: 2em; */
+  margin-left: 1em;
 }
 
-nav ul li a {
-  width: 10em;
+nav ul li .link {
+  width: 8em;
   padding: 1em;
   line-height: 1em;
   float: left;
   color: var(--white-3);
   text-decoration: none;
   background: var(--secondary);
-  filter: drop-shadow(0em 0em 0.5em var(--black-3));
+  border-bottom: 0.2em solid var(--black-3);
+  filter: drop-shadow(0em 0em 0.5em var(--black-2));
   transition: 0.3s;
 }
 
-nav ul li a:hover {
+nav ul li .link:hover {
   color: var(--secondary);
   background: var(--highlight);
   border-radius: 2em;
   filter: none;
+  border-bottom: 0.2em solid var(--highlight);
   filter: drop-shadow(0em 0em 0em var(--highlight));
   transition: 0.3s;
 }
 
-#active {
-  border-bottom: 0.2em solid var(--highlight);
+.active {
+  border-bottom: 0.2em solid var(--highlight) !important;
   transition: 0.3s;
 }
 
-#active:hover {
+.active:hover {
   border-bottom: 0.2em solid var(--highlight);
   transition: 0.3s;
 }
@@ -84,6 +83,65 @@ nav ul li a:hover {
     background-color: var(--black-3);
     box-shadow: 0px 10px 30px #999;
 }
+
+/* ---------------- Footer ---------------- */
+footer {
+  width: 100%;
+  height: 13em;
+  background-color: var(--black-3);
+  box-shadow: 0px -10px 30px #999;
+  margin-top: 5em;
+}
+
+.footerInfo {
+  width: 100%;
+  height: 6em;
+  display: flex;
+}
+
+.fSections {
+  width: 33.33%;
+  height: 10em;
+  flex-direction: row;
+  text-align: center;
+}
+
+.fSections h2 {
+  color: var(--white-4);
+  margin-top: 1.5em;
+  font-size: 1.17em;
+}
+
+.fSections p {
+  color: var(--white-4);
+  opacity: 0.5;
+}
+
+footer hr {
+  border: 0;
+  height: 1px;
+  background: var(--white-4);
+  opacity: 0.1;
+}
+
+.footerEndNote {
+  width: 100%;
+  text-align: center;
+  margin-top: 1.2em;
+  color: var(--white-4);
+  font-weight: bold;
+  cursor: default;
+}
+
+.adjustHighlight {
+  color: var(--highlight);
+}
+
+.disclaimer {
+  font-weight: normal;
+  opacity: 0.5;
+}
+/* -------------- Footer end -------------- */
 
 /* .App-logo {
   height: 40vmin;
