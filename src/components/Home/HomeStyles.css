@@ -14,3 +14,25 @@
   height: 50vh;
   object-fit: cover;
 }
+
+.quoteBlock {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  margin-left: -17.5em;
+  width: 35em;
+  color: var(--white-3);
+  /* text-shadow: -1px -1px 2 #000, 1px -1px 2 #000, -1px 1px 2 #000, 1px 1px 2 #000; */
+  text-shadow: 0px 5px 8px #000;
+}
+
+.quote {
+  font-size: 3em;
+}
+
+.quoteAuthor {
+  width: 10em;
+  margin: auto;
+  color: var(--white-3);
+  background-color: #14213de0;
+}
