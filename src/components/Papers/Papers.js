@@ -10,7 +10,11 @@ class Papers extends React.Component {
   }
 
   componentDidMount() {
-    const url = "http://unn-w18014333.newnumyspace.co.uk/kf6012/coursework/part1/api/papers"
+    let url = "http://unn-w18014333.newnumyspace.co.uk/kf6012/coursework/part1/api/papers"
+
+    if (this.props.authorId !== undefined) {
+      url += "?author_id=" + this.props.authorId
+    }
 
     fetch(url)
       .then((response) => {
@@ -29,7 +33,7 @@ class Papers extends React.Component {
     console.log(this.state.results)
     return (
       <div>
-        {this.state.results.map((paper, i) => (<Paper key={i} paper={paper}/>))}
+        {this.state.results.map((paper, i) => (<Paper key={i} paper={paper} />))}
         {/* <p key={i}>{film.paper_title}</p> */}
       </div>
     )
