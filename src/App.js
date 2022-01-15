@@ -1,13 +1,13 @@
 import './App.css';
-import Home from './components/Home/Home';
-import Papers from './components/Papers/Papers';
-import Authors from './components/Authors/Authors';
-import ReadingList from './components/ReadingList/ReadingList';
+import Home from './components/Pages/Home/HomePage';
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
+import PapersPage from './components/Pages/PapersPage/PapersPage';
+import AuthorsPage from './components/Pages/AuthorsPage/AuthorsPage';
+import ReadingListPage from './components/Pages/ReadingListPage/ReadingListPage';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/kf6012/coursework/part2">
       <div className="App">
         <header className="header">
           <nav>
@@ -23,9 +23,9 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="papers" element={<Papers />} />
-            <Route path="authors" element={<Authors />} />
-            <Route path="reading_list" element={<ReadingList />} />
+            <Route path="papers" element={<PapersPage />} />
+            <Route path="authors" element={<AuthorsPage />} />
+            <Route path="reading_list" element={<ReadingListPage />} />
             <Route path="*" element={<p>Not found</p>} />
           </Routes>
         </main>

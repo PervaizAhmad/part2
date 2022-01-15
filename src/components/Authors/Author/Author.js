@@ -2,6 +2,13 @@ import React from "react";
 import Papers from "../../Papers/Papers";
 import "./Author.css";
 
+/**
+ * This is the Author component which defines how a single author
+ * is displayed. It uses conditional rendering to display the papers
+ * of that author when the author's name is clicked.
+ * 
+ * @author Pervaiz Ahmad w18014333 
+ */
 class Author extends React.Component {
 
     constructor(props) {

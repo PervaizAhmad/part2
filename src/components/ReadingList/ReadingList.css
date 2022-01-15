@@ -1,0 +1,12 @@
+.readingListPaper {
+    display: flex;
+    justify-content: center;
+}
+
+.checkBox {
+    margin-top: 2em;
+}
+
+.paperElement {
+    width: 30em;
+}

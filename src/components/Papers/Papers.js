@@ -1,40 +1,129 @@
 import React from "react";
 import Paper from "./Paper/Paper";
 
+/**
+ * This is the papers component which calls the papers
+ * API endpoint and returns a list of all paers. The
+ * returned papers are divided into pages and buttons
+ * allow the user to navigate between these pages with
+ * a page number indicator which also states the total 
+ * number of pages.
+ * 
+ * @author Pervaiz Ahmad w18014333
+ */
 class Papers extends React.Component {
+
+  searchErr = false
 
   constructor(props) {
     super(props)
     this.state = { results: [] }
-    console.log("constructor")
   }
 
   componentDidMount() {
     let url = "http://unn-w18014333.newnumyspace.co.uk/kf6012/coursework/part1/api/papers"
+    this.fetchData(url)
+  }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.award !== this.props.award) {
+      let url = "http://unn-w18014333.newnumyspace.co.uk/kf6012/coursework/part1/api/papers"
+      this.fetchData(url)
+    } else if (prevProps.titleSearch !== this.props.titleSearch) {
+      let url = "http://unn-w18014333.newnumyspace.co.uk/kf6012/coursework/part1/api/papers"
+      this.fetchData(url)
+    }
+  }
+
+  fetchData = (url) => {
     if (this.props.authorId !== undefined) {
       url += "?author_id=" + this.props.authorId
+    } else if (this.props.award !== undefined && this.props.award !== "" && this.props.award !== "custom") {
+      url += "?award=" + this.props.award
+    } else if (this.props.titleSearch !== undefined && this.props.titleSearch !== "") {
+      url += "?title=" + this.props.titleSearch
+      this.searchErr = false
     }
 
     fetch(url)
       .then((response) => {
-        return response.json()
+        if (response.status === 200) {
+          return response.json()
+        } else {
+          throw Error(response.statusText);
+        }
       })
       .then((data) => {
-        this.setState({ results: data.results })
+        if (this.props.randonPaper) {
+          const randonPaperId = Math.floor(Math.random() * data.results.length) + 1
+          this.setState({ results: [data.results[randonPaperId]] })
+        } else {
+          this.setState({ results: data.results })
+        }
       })
       .catch((err) => {
-        console.log("something went wrong ", err)
+        if (err.message === 'No Content') {
+          this.searchErr = true
+          this.setState({ results: [] })
+          console.log('Status 204: No Content');
+        } else {
+          console.log("something went wrong ", err)
+        }
       });
   }
 
+  /**
+   * Returns true if the titleSearch prop is a substring
+   * of the paper's title.
+   * 
+   * @param {any} paper The paper to be checked.
+   * @returns           A boolean, whether the paper should be displayed
+   */
+  filterBySearch = (paper) => {
+    return paper.paper_title.toLowerCase().includes(this.props.titleSearch.toLowerCase())
+  }
+
   render() {
-    console.log("render")
-    console.log(this.state.results)
+    let noData = ''
+
+    if (this.state.results.length === 0 || this.searchErr) {
+      noData = 'No Data'
+    }
+
+    let filteredResults = this.state.results
+
+    // If searching for title AND award
+    if (this.props.titleSearch !== undefined &&
+      this.props.titleSearch !== '' &&
+      this.props.award !== undefined &&
+      this.props.award !== '') {
+      filteredResults = filteredResults.filter(this.filterBySearch)
+    }
+
+    let buttons = ''
+
+    if (this.props.page !== undefined) {
+      const pageSize = 10
+      let pageMax = this.props.page * pageSize
+      let pageMin = pageMax - pageSize
+
+      buttons = (
+        <div>
+          <p>Page {this.props.page} of {Math.ceil(filteredResults.length / pageSize)}</p>
+          <button onClick={this.props.handlePreviousClick} disabled={this.props.page <= 1}>Previous</button>
+          <button onClick={this.props.handleNextClick} disabled={this.props.page >= Math.ceil(filteredResults.length / pageSize)}>Next</button>
+        </div>
+      )
+
+      filteredResults = filteredResults.slice(pageMin, pageMax)
+    }
+    //.filter(this.filterByAward)
+
     return (
       <div>
-        {this.state.results.map((paper, i) => (<Paper key={i} paper={paper} />))}
-        {/* <p key={i}>{film.paper_title}</p> */}
+        {noData}
+        {filteredResults.map((paper, i) => (<Paper key={i + paper.paper_id} paper={paper} />))}
+        {buttons}
       </div>
     )
   }

@@ -1,6 +1,13 @@
 import React from "react";
 import "./Paper.css";
 
+/**
+ * This is the paper component which defines how a single
+ * paper is displayed. It uses conditional rendering to
+ * display the details of the paper when the title is clicked.
+ * 
+ * @author Pervaiz Ahmad w18014333
+ */
 class Paper extends React.Component {
 
     constructor(props) {
