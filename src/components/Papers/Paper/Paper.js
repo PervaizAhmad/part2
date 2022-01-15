@@ -9,13 +9,14 @@ import "./Paper.css";
  * @author Pervaiz Ahmad w18014333
  */
 class Paper extends React.Component {
-  _isMounted = false;
+  _isMounted = true;
 
   constructor(props) {
     super(props)
     this.state = {
       display: false,
-      authors: []
+      authors: [],
+      active: false
     }
   }
 
@@ -48,9 +49,7 @@ class Paper extends React.Component {
       .catch((err) => {
         if (err.message === 'No Content') {
           this.searchErr = true
-          if (this._isMounted) {
-            this.setState({ results: [] })
-          }
+          this.setState({ results: [] })
           console.log('Status 204: No Content');
         } else {
           console.log("something went wrong ", err)
@@ -59,27 +58,32 @@ class Paper extends React.Component {
   }
 
   handleClick = () => {
-    this.setState({ display: !this.state.display })
+    this.setState({ display: !this.state.display, active: !this.state.active })
   }
 
   render() {
-    let details = "";
+    let award = ""
+    let details = ""
+
+    if(this.props.paper.award_type_id !== null) {
+      award = <p className="paperAward"><strong color="adjustHighlight">Award: </strong>{this.props.paper.award_type_name}</p>
+    }
 
     if (this.state.display) {
       details =
         <div>
           <p>{this.props.paper.paper_abstract}</p>
           <p><strong>Authors: </strong>|{this.state.authors.map((author, i) => (<span key={i + author.author_id}>| {author.first_name + ' ' + author.middle_name + ' ' + author.last_name} |</span>))}|</p>
+          {award}
           <p><a href={this.props.paper.paper_doi}>DOI of Paper</a></p>
           <p><a href={this.props.paper.paper_preview}>Paper Preview Video</a></p>
           <p><a href={this.props.paper.paper_video}>Paper Full Video</a></p>
-          <p>{this.props.paper.award_type_name}</p>
         </div>
     }
 
     return (
       <div className="paper">
-        <p onClick={this.handleClick}>{this.props.paper.paper_title}</p>
+        <p className={this.state.active ? 'paperActive' : 'paperTitle'} onClick={this.handleClick}>{this.props.paper.paper_title}</p>
         {details}
       </div>
     )

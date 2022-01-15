@@ -1,0 +1,11 @@
+.papersContainer {
+  margin-top: 2em;
+}
+
+.papers {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}

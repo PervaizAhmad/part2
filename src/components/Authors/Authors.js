@@ -1,5 +1,6 @@
 import React from "react";
 import Author from "./Author/Author";
+import "./Authors.css";
 
 /**
  * This is the Authors page which calls the authors API endpoint
@@ -76,8 +77,8 @@ class Authors extends React.Component {
       buttons = (
         <div>
           <p>Page {this.props.page} of {Math.ceil(results.length / pageSize)}</p>
-          <button onClick={this.props.handlePreviousClick} disabled={this.props.page <= 1}>Previous</button>
-          <button onClick={this.props.handleNextClick} disabled={this.props.page >= Math.ceil(results.length / pageSize)}>Next</button>
+          <button className="linkButton" onClick={this.props.handlePreviousClick} disabled={this.props.page <= 1}>Previous</button>
+          <button className="linkButton" onClick={this.props.handleNextClick} disabled={this.props.page >= Math.ceil(results.length / pageSize)}>Next</button>
         </div>
       )
 
@@ -86,9 +87,11 @@ class Authors extends React.Component {
 
 
     return (
-      <div>
-        {noData}
-        {results.map((author, i) => (<Author key={i + author.author_id} author={author} />))}
+      <div className="authorsContainer">
+        <div className="authors">
+          {noData}
+          {results.map((author, i) => (<Author key={i + author.author_id} author={author} />))}
+        </div>
         {buttons}
       </div>
     )

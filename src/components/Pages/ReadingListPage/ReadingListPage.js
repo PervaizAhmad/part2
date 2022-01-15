@@ -4,6 +4,7 @@ import Logout from "../../Logout/Logout";
 import ReadingList from "../../ReadingList/ReadingList";
 
 class ReadingListPage extends React.Component {
+  _isMounted = true;
 
   constructor(props) {
     super(props);
@@ -21,17 +22,27 @@ class ReadingListPage extends React.Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem('loginToken')) {
+    if (localStorage.getItem('loginToken') && this._isMounted) {
       this.setState({ authenticated: true, token: localStorage.getItem('loginToken') });
     }
   }
 
+  componentWillUnmount() {
+    // changing flag to false so state doesnt
+    // try to update on an unmounted component
+    this._isMounted = false;
+  }
+
   handleEmail = (e) => {
-    this.setState({ email: e.target.value })
+    if (this._isMounted) {
+      this.setState({ email: e.target.value })
+    }
   }
 
   handlePassword = (e) => {
-    this.setState({ password: e.target.value })
+    if (this._isMounted) {
+      this.setState({ password: e.target.value })
+    }
   }
 
   handleLoginClick = () => {
@@ -60,7 +71,7 @@ class ReadingListPage extends React.Component {
       .then((data) => {
         // If results include a token, change state
         // to authenticated
-        if ("token" in data.results) {
+        if ("token" in data.results && this._isMounted) {
           localStorage.setItem('loginToken', data.results.token)
           this.setState({ authenticated: true, token: localStorage.getItem('loginToken') })
         }
@@ -72,8 +83,10 @@ class ReadingListPage extends React.Component {
   }
 
   handleLogoutClick = () => {
-    this.setState({ authenticated: false, token: null })
-    localStorage.removeItem('loginToken')
+    if (this._isMounted) {
+      this.setState({ authenticated: false, token: null })
+      localStorage.removeItem('loginToken')
+    }
   }
 
   render() {

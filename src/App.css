@@ -1,23 +1,50 @@
 @charset "UTF-8";
 
 :root {
-    /* -- colour palette -- */
-    /* -------------------- */
-    --black-1: #000000;
-    --black-2: #101010;
-    --black-3: #202020;
-    --white-1: #FFFFFF;
-    --white-2: #F2F2F2;
-    --white-3: #E5E5E5;
-    --white-4: #D8D8D8;
-    --secondary: #14213D;
-    --highlight: #FCA311;
+  /* -- colour palette -- */
+  /* -------------------- */
+  --black-1: #000000;
+  --black-2: #101010;
+  --black-3: #202020;
+  --white-1: #FFFFFF;
+  --white-2: #F2F2F2;
+  --white-3: #E5E5E5;
+  --white-4: #D8D8D8;
+  --secondary: #14213D;
+  --highlight: #FCA311;
 }
 
 /* *{border:1px dashed red;} */
 
 body {
-    background-color: var(--white-3);
+  background-color: var(--white-3);
+}
+
+.linkButton {
+  padding: 0.5em;
+  margin: 0.5em;
+  text-decoration: none;
+  color: var(--white-1);
+  border: none;
+  border-bottom: 0.2em solid var(--highlight);
+  cursor: pointer;
+  background: var(--secondary);
+  transition: 0.3s;
+}
+
+.linkButton:disabled {
+  cursor: default;
+  background-color: var(--white-4);
+  color: var(--secondary);
+  border-color: var(--secondary);
+}
+
+.linkButton:hover:enabled {
+  color: var(--secondary);
+  border-radius: 0.5em;
+  border-bottom: 0.2em solid rgba(0,0,0,0);
+  background: var(--highlight);
+  transition: 0.3s;
 }
 
 /* ------------ Navigation Bar ------------ */
@@ -72,6 +99,7 @@ nav ul li .link:hover {
   border-bottom: 0.2em solid var(--highlight);
   transition: 0.3s;
 }
+
 /* ---------- Navigation Bar end ---------- */
 
 .App {
@@ -79,9 +107,9 @@ nav ul li .link:hover {
 }
 
 .header {
-    height: 5em;
-    background-color: var(--black-3);
-    box-shadow: 0px 10px 30px #999;
+  height: 5em;
+  background-color: var(--black-3);
+  box-shadow: 0px 10px 30px #999;
 }
 
 /* ---------------- Footer ---------------- */
@@ -141,6 +169,7 @@ footer hr {
   font-weight: normal;
   opacity: 0.5;
 }
+
 /* -------------- Footer end -------------- */
 
 /* .App-logo {

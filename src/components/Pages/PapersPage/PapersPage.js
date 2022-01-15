@@ -88,8 +88,6 @@ class PapersPage extends React.Component {
       )
     }
 
-    console.log(this.state.readingList);
-
     return (
       <div>
         {readingListFilter}

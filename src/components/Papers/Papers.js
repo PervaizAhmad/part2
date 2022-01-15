@@ -1,5 +1,6 @@
 import React from "react";
 import Paper from "./Paper/Paper";
+import "./Papers.css"
 
 /**
  * This is the papers component which calls the papers
@@ -118,19 +119,20 @@ class Papers extends React.Component {
       buttons = (
         <div>
           <p>Page {this.props.page} of {Math.ceil(filteredResults.length / pageSize)}</p>
-          <button onClick={this.props.handlePreviousClick} disabled={this.props.page <= 1}>Previous</button>
-          <button onClick={this.props.handleNextClick} disabled={this.props.page >= Math.ceil(filteredResults.length / pageSize)}>Next</button>
+          <button className="linkButton" onClick={this.props.handlePreviousClick} disabled={this.props.page <= 1}>Previous</button>
+          <button className="linkButton" onClick={this.props.handleNextClick} disabled={this.props.page >= Math.ceil(filteredResults.length / pageSize)}>Next</button>
         </div>
       )
 
       filteredResults = filteredResults.slice(pageMin, pageMax)
     }
-    //.filter(this.filterByAward)
 
     return (
-      <div>
-        {noData}
-        {filteredResults.map((paper, i) => (<Paper key={i + paper.paper_id} paper={paper} />))}
+      <div className="papersContainer">
+        <div className="papers">
+          {noData}
+          {filteredResults.map((paper, i) => (<Paper key={i + paper.paper_id} paper={paper} />))}
+        </div>
         {buttons}
       </div>
     )

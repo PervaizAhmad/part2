@@ -1,13 +1,16 @@
 import './App.css';
 import Home from './components/Pages/Home/HomePage';
-import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
+import { HashRouter, Routes, Route, NavLink } from 'react-router-dom';
 import PapersPage from './components/Pages/PapersPage/PapersPage';
 import AuthorsPage from './components/Pages/AuthorsPage/AuthorsPage';
 import ReadingListPage from './components/Pages/ReadingListPage/ReadingListPage';
 
 function App() {
+  // /kf6012/coursework/part2
+  // Application.json after line 4:
+  // "homepage": "http://unn-w18014333.newnumyspace.co.uk/kf6012/coursework/part2",
   return (
-    <BrowserRouter basename="/kf6012/coursework/part2">
+    <HashRouter hashType="slash">
       <div className="App">
         <header className="header">
           <nav>
@@ -52,7 +55,7 @@ function App() {
           </div>
         </footer>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

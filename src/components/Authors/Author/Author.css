@@ -1,11 +1,39 @@
-.author {
-    cursor: pointer;
+.author, .authorCardActive {
+  min-width: 20em;
+  width: fit-content;
+  padding: 1em;
+  margin: 0em 0em 1em 1em;
+  color: var(--secondary);
+  background-color: var(--white-4);
+  border-bottom: 0.2em solid var(--secondary);
+  border-left: 0.2em solid rgba(0,0,0,0);
+  border-right: 0.2em solid rgba(0,0,0,0);
+  border-top: 0.2em solid rgba(0,0,0,0);
+  box-shadow: 0px 10px 30px #999;
+  transition: 0.3s;
 }
 
-.author:nth-child(odd) {
-    background-color: #ccc;
+.authorCardActive {
+  border: 0.2em solid rgba(0,0,0,0);
 }
 
-.author:nth-child(even) {
-    background-color: #999;
+.authorActive, .authorName {
+  padding: 1em;
+  border: 0.1em solid var(--highlight);
+  border-radius: 0.5em;
+  color: var(--secondary);
+  border-color: var(--highlight);
+  box-shadow: 0px 0px 1px #999;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.authorActive {
+  border-color: var(--secondary);
+  box-shadow: 0px 5px 8px #999;
+}
+
+.authorActive:hover, .authorName:hover {
+  box-shadow: 0px 5px 8px #999;
+  transition: 0.3s;
 }

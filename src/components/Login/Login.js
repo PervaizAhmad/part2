@@ -4,7 +4,7 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div>
+            <form>
                 <input
                     type='text'
                     placeholder='email'
@@ -15,10 +15,11 @@ class Login extends React.Component {
                     type='password'
                     placeholder='password'
                     value={this.props.password}
+                    autoComplete='on'
                     onChange={this.props.handlePassword}
                 />
                 <button onClick={this.props.handleLoginClick}>Log In</button>
-            </div>
+            </form>
         );
     }
 }
