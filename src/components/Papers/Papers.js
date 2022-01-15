@@ -29,10 +29,16 @@ class Papers extends React.Component {
     if (prevProps.award !== this.props.award) {
       let url = "http://unn-w18014333.newnumyspace.co.uk/kf6012/coursework/part1/api/papers"
       this.fetchData(url)
-    } else if (prevProps.titleSearch !== this.props.titleSearch) {
+    } else if (this.props.award !== 'custom' && prevProps.titleSearch !== this.props.titleSearch) {
       let url = "http://unn-w18014333.newnumyspace.co.uk/kf6012/coursework/part1/api/papers"
       this.fetchData(url)
-    }
+    } else if (this.props.award === 'custom' && prevProps.awardTypeId !== this.props.awardTypeId) {
+      let url = "http://unn-w18014333.newnumyspace.co.uk/kf6012/coursework/part1/api/papers"
+      this.fetchData(url)
+    } /*else if (this.props.readingList !== undefined && this.props.readingList !== '') {
+      let url = "http://unn-w18014333.newnumyspace.co.uk/kf6012/coursework/part1/api/papers"
+      this.fetchData(url)
+    }*/
   }
 
   fetchData = (url) => {
@@ -43,6 +49,8 @@ class Papers extends React.Component {
     } else if (this.props.titleSearch !== undefined && this.props.titleSearch !== "") {
       url += "?title=" + this.props.titleSearch
       this.searchErr = false
+    } else if (this.props.award === 'custom' && this.props.awardTypeId !== undefined && this.props.awardTypeId !== '') {
+      url += "?award_id=" + this.props.awardTypeId
     }
 
     fetch(url)

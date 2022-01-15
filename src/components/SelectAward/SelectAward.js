@@ -16,19 +16,19 @@ import React from "react";
  */
 class SelectAward extends React.Component {
 
-    render() {
-        return (
-            <label>
-                Awards:
-                <select value={this.props.award} onChange={this.props.handleAwardSelect}>
-                    <option value="">All papers</option>
-                    <option value="none">No awards</option>
-                    <option value="all">All awards</option>
-                    <option value="custom">Custom Select</option>
-                </select>
-            </label>
-        )
-    }
+  render() {
+    return (
+      <label>
+        Awards:
+        <select value={this.props.award} onChange={this.props.handleAwardSelect}>
+          <option value="">All papers</option>
+          <option value="none">No awards</option>
+          <option value="all">All awards</option>
+          <option value="custom">Custom Select</option>
+        </select>
+      </label>
+    )
+  }
 }
 
 export default SelectAward;
