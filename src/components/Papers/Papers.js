@@ -36,10 +36,10 @@ class Papers extends React.Component {
     } else if (this.props.award === 'custom' && prevProps.awardTypeId !== this.props.awardTypeId) {
       let url = "http://unn-w18014333.newnumyspace.co.uk/kf6012/coursework/part1/api/papers"
       this.fetchData(url)
-    } /*else if (this.props.readingList !== undefined && this.props.readingList !== '') {
+    } else if (prevProps.readingList !== this.props.readingList) {
       let url = "http://unn-w18014333.newnumyspace.co.uk/kf6012/coursework/part1/api/papers"
       this.fetchData(url)
-    }*/
+    }
   }
 
   fetchData = (url) => {
@@ -92,6 +92,19 @@ class Papers extends React.Component {
     return paper.paper_title.toLowerCase().includes(this.props.titleSearch.toLowerCase())
   }
 
+  filterByReadingList = (paper) => {
+    let displayPaper = false
+    this.props.readingList.forEach(list => {
+      if (list.paper_id === paper.paper_id) {
+        displayPaper = true;
+      }
+    });
+
+    if (displayPaper) {
+      return true
+    }
+  }
+
   render() {
     let noData = ''
 
@@ -100,6 +113,14 @@ class Papers extends React.Component {
     }
 
     let filteredResults = this.state.results
+
+    if (filteredResults.length !== 0) {
+      if (this.props.showReadingList &&
+        this.props.readingList !== undefined &&
+        this.props.readingList !== null) {
+        filteredResults = filteredResults.filter(this.filterByReadingList)
+      }
+    }
 
     // If searching for title AND award
     if (this.props.titleSearch !== undefined &&

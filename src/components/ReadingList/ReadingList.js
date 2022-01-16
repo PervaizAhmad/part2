@@ -58,9 +58,11 @@ class ReadingList extends React.Component {
       })
       .then((data) => {
         this.setState({ readinglist: data.results })
+        this.props.setReadingList(this.state.readinglist)
       })
       .catch((err) => {
         console.log("something went wrong ", err)
+        this.props.handleLogoutClick()
       });
   }
 

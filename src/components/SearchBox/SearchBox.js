@@ -19,7 +19,7 @@ class SearchBox extends React.Component {
     render() {
            return (
                <label>
-                   Search {this.props.type}
+                   Search {this.props.type}: &nbsp;
                    <input type='text' placeholder={this.props.type + '...'} value={this.props.search} onChange={this.props.handleSearch} />
                </label>
            )

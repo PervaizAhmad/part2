@@ -11,11 +11,6 @@ import Papers from "../../Papers/Papers";
  */
 class Home extends React.Component {
 
-  constructor(props) {
-    super(props)
-    console.log('Home Constructor')
-  }
-
   render() {
     return (
       <div className="homeContainer">

@@ -17,7 +17,7 @@ class PapersPage extends React.Component {
       award: "",
       awardTypeId: "",
       titleSearch: "",
-      readingList: "",
+      showReadingList: null,
       page: 1
     }
 
@@ -48,21 +48,25 @@ class PapersPage extends React.Component {
     this.setState({ page: this.state.page - 1 })
   }
 
-  handleReadingList = (e) => {
-    this.setState({ readingList: e.target.value, page: 1 })
+  handleLoggedIn = (e) => {
+    if (e.target.value === 'true') {
+      this.setState({ showReadingList: true })
+    } else {
+      this.setState({ showReadingList: false })
+    }
   }
 
   render() {
     let awardFilter = ''
     let readingListFilter = ''
 
-    if (localStorage.getItem('loginToken') !== null) {
+    if (this.props.readingList !== null) {
       readingListFilter = (
         <label>
           Show Only Reading List:
-          <select value={this.state.readingList} onChange={this.handleReadingList}>
-            <option value="">No</option>
-            <option value="yes">Yes</option>
+          <select onChange={this.handleLoggedIn}>
+            <option value="false">No</option>
+            <option value="true">Yes</option>
           </select>
         </label>
       )
@@ -70,7 +74,7 @@ class PapersPage extends React.Component {
 
     if (this.state.award === 'custom') {
       awardFilter = (
-        <div>
+        <div className="formFieldContainer">
           <SelectAward
             award={this.state.award}
             handleAwardSelect={this.handleAwardSelect} />
@@ -82,24 +86,29 @@ class PapersPage extends React.Component {
       )
     } else {
       awardFilter = (
-        <SelectAward
-          award={this.state.award}
-          handleAwardSelect={this.handleAwardSelect} />
+        <div className="formFieldContainer">
+          <SelectAward
+            award={this.state.award}
+            handleAwardSelect={this.handleAwardSelect} />
+        </div>
       )
     }
 
     return (
       <div>
-        {readingListFilter}
-        <SearchBox
-          search={this.state.titleSearch} type={'Title'}
-          handleSearch={this.handleSearch} />
+        <div className="formFieldContainer adjustTop">
+          <SearchBox
+            search={this.state.titleSearch} type={'Title'}
+            handleSearch={this.handleSearch} /> &nbsp;
+          {readingListFilter}
+        </div>
         {awardFilter}
         <Papers
           award={this.state.award}
           awardTypeId={this.state.awardTypeId}
           titleSearch={this.state.titleSearch}
-          readingList={this.state.readingList}
+          readingList={this.props.readingList}
+          showReadingList={this.state.showReadingList}
           page={this.state.page}
           handleNextClick={this.handleNextClick}
           handlePreviousClick={this.handlePreviousClick} />

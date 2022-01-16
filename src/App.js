@@ -1,4 +1,5 @@
 import './App.css';
+import { useState } from "react";
 import Home from './components/Pages/Home/HomePage';
 import { HashRouter, Routes, Route, NavLink } from 'react-router-dom';
 import PapersPage from './components/Pages/PapersPage/PapersPage';
@@ -9,6 +10,11 @@ function App() {
   // /kf6012/coursework/part2
   // Application.json after line 4:
   // "homepage": "http://unn-w18014333.newnumyspace.co.uk/kf6012/coursework/part2",
+
+  const [readingList, setReadingList] = useState(null)
+  // console.log(readingList);
+  //[0].email
+
   return (
     <HashRouter hashType="slash">
       <div className="App">
@@ -26,9 +32,9 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="papers" element={<PapersPage />} />
+            <Route path="papers" element={<PapersPage readingList={readingList} />} />
             <Route path="authors" element={<AuthorsPage />} />
-            <Route path="reading_list" element={<ReadingListPage />} />
+            <Route path="reading_list" element={<ReadingListPage setReadingList={setReadingList} />} />
             <Route path="*" element={<p>Not found</p>} />
           </Routes>
         </main>

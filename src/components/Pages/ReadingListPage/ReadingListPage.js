@@ -22,7 +22,7 @@ class ReadingListPage extends React.Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem('loginToken') && this._isMounted) {
+    if (localStorage.getItem('loginToken')) {
       this.setState({ authenticated: true, token: localStorage.getItem('loginToken') });
     }
   }
@@ -34,9 +34,7 @@ class ReadingListPage extends React.Component {
   }
 
   handleEmail = (e) => {
-    if (this._isMounted) {
       this.setState({ email: e.target.value })
-    }
   }
 
   handlePassword = (e) => {
@@ -71,7 +69,7 @@ class ReadingListPage extends React.Component {
       .then((data) => {
         // If results include a token, change state
         // to authenticated
-        if ("token" in data.results && this._isMounted) {
+        if ("token" in data.results) {
           localStorage.setItem('loginToken', data.results.token)
           this.setState({ authenticated: true, token: localStorage.getItem('loginToken') })
         }
@@ -83,10 +81,9 @@ class ReadingListPage extends React.Component {
   }
 
   handleLogoutClick = () => {
-    if (this._isMounted) {
       this.setState({ authenticated: false, token: null })
       localStorage.removeItem('loginToken')
-    }
+      this.props.setReadingList(null)
   }
 
   render() {
@@ -102,7 +99,7 @@ class ReadingListPage extends React.Component {
       page = (
         <div>
           <Logout handleLogoutClick={this.handleLogoutClick} />
-          <ReadingList token={this.state.token} />
+          <ReadingList handleLogoutClick={this.handleLogoutClick} token={this.state.token} setReadingList={this.props.setReadingList} />
         </div>
       )
     }

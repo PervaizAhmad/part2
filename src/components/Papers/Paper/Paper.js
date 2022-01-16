@@ -75,9 +75,9 @@ class Paper extends React.Component {
           <p>{this.props.paper.paper_abstract}</p>
           <p><strong>Authors: </strong>|{this.state.authors.map((author, i) => (<span key={i + author.author_id}>| {author.first_name + ' ' + author.middle_name + ' ' + author.last_name} |</span>))}|</p>
           {award}
-          <p><a href={this.props.paper.paper_doi}>DOI of Paper</a></p>
-          <p><a href={this.props.paper.paper_preview}>Paper Preview Video</a></p>
-          <p><a href={this.props.paper.paper_video}>Paper Full Video</a></p>
+          <p><a className="links" href={this.props.paper.paper_doi} target="_blank" rel="noreferrer">DOI of Paper</a></p>
+          <p><a className="links" href={this.props.paper.paper_preview} target="_blank" rel="noreferrer">Paper Preview Video</a></p>
+          <p><a className="links" href={this.props.paper.paper_video} target="_blank" rel="noreferrer">Paper Full Video</a></p>
         </div>
     }
 

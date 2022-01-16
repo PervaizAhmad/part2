@@ -60,7 +60,7 @@ class SelectAwardType extends React.Component {
 
     render() {
         return (
-            <label>
+            <label className="formFieldContainer">
                 Awards:
                 <select value={this.props.award} onChange={this.props.handleAwardTypeSelect}>
                     <option value="">All papers</option>
